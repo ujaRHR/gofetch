@@ -24,9 +24,14 @@ profile.cov
 go.work
 go.work.sum
 
+# temp (custom)
+main.go
+learning.todo
+hello.txt
+
 # env file
 .env
 
 # Editor/IDE
 # .idea/
-# .vscode/
+.vscode/
