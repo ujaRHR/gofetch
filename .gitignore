@@ -26,8 +26,8 @@ go.work.sum
 
 # temp (custom)
 main.go
-learning.todo
-hello.txt
+SAMPLE.md
+internal/
 
 # env file
 .env
