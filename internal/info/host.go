@@ -39,3 +39,20 @@ func GetKernalInfo() (string, error) {
 
 	return string(val), nil
 }
+
+func GetUpTime() (string, error) {
+	cmd := exec.Command("uptime", "-p")
+	out, err := cmd.Output()
+
+	if err != nil {
+		return "", errors.New("coudn't find any uptime info")
+	}
+
+	val := strings.TrimSpace(string(out))
+
+	if after, ok := strings.CutPrefix(val, "up "); ok {
+		val = after
+	}
+
+	return val, nil
+}
