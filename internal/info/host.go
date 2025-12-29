@@ -69,10 +69,21 @@ func GetShellInfo() (string, error) {
 	out := os.Getenv("SHELL")
 
 	if out == "" {
-		return "", errors.New("couldn't find SHELL variable info")
+		return "", errors.New("couldn't find $SHELL info")
 	}
 
 	shell := filepath.Base(out)
 
 	return shell, nil
+}
+
+// Locale info from the $LANG env variable
+func GetLocaleInfo() (string, error) {
+	locale := os.Getenv("LANG")
+
+	if locale == "" {
+		return "", errors.New("couldn't find $LANG info")
+	}
+
+	return locale, nil
 }
