@@ -26,6 +26,7 @@ go.work.sum
 
 # temp (custom)
 main.go
+test.go
 SAMPLE.md
 internal/
 

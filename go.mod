@@ -1,3 +1,3 @@
-module github.com/ujaRHR/gofetch
+module gofetch
 
 go 1.25.3
