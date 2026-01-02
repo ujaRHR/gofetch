@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"errors"
 	"os"
+	"os/exec"
+	"regexp"
 	"runtime"
 	"strings"
 )
@@ -44,4 +46,31 @@ func GetCPUInfo() (CPU, error) {
 	}
 
 	return CPU{}, errors.New("model name not found in /proc/cpuinfo")
+}
+
+func GetGPUInfo() (string, error) {
+	cmd := exec.Command("lspci")
+	data, err := cmd.Output()
+
+	if err != nil {
+		return "", errors.New("couldn't find any GPU info using lspci command")
+	}
+
+	lines := strings.SplitSeq(string(data), "\n")
+
+	for line := range lines {
+		if strings.Contains(strings.ToLower(line), "vga") {
+			parts := strings.SplitN(line, ":", 3)
+			if len(parts) == 3 {
+				line = parts[2]
+			}
+
+			re := regexp.MustCompile(`\s*\(rev.*\)`)
+			line = re.ReplaceAllString(line, "")
+
+			return strings.TrimSpace(line), nil
+		}
+	}
+
+	return "", errors.New("no GPU found")
 }
