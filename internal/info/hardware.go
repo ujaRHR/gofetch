@@ -16,14 +16,14 @@ type CPU struct {
 	ModelName string
 }
 
-// type Memory struct {
-// 	TotalMemory      float64
-// 	UsedMemory       float64
-// 	MemoryPercentage float64
-// 	SwapMemory       float64
-// 	UsedSwap         float64
-// 	SwapPercentage   float64
-// }
+type Memory struct {
+	TotalMemory      float64
+	UsedMemory       float64
+	MemoryPercentage float64
+	SwapMemory       float64
+	UsedSwap         float64
+	SwapPercentage   float64
+}
 
 // CPU Info from /proc/cpuinfo file
 func GetCPUInfo() (CPU, error) {
