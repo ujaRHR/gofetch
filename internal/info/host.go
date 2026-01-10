@@ -2,6 +2,7 @@ package info
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -18,18 +19,23 @@ func GetOSRelease() (string, error) {
 	}
 
 	lines := strings.SplitSeq(string(data), "\n")
+	var prettyName, releaseType string
 
 	for line := range lines {
 		line = strings.TrimSpace(line)
 
 		if strings.HasPrefix(line, "PRETTY_NAME") {
 			val := strings.TrimPrefix(line, "PRETTY_NAME=")
-			val = strings.Trim(val, `"`)
-			return val, nil
+			prettyName = strings.Trim(val, `"`)
+		}
+
+		if strings.HasPrefix(line, "RELEASE_TYPE") {
+			val := strings.TrimPrefix(line, "RELEASE_TYPE=")
+			releaseType = strings.Trim(val, `"`)
 		}
 	}
 
-	return "", errors.New("coudn't find any OS release info")
+	return fmt.Sprintf("%s / %s", prettyName, releaseType), nil
 }
 
 // Kernal Version Info
