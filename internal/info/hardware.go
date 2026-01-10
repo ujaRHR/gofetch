@@ -3,6 +3,7 @@ package info
 import (
 	"bufio"
 	"errors"
+	"fmt"
 	"os"
 	"os/exec"
 	"regexp"
@@ -144,4 +145,19 @@ func GetMemoryInfo() (Memory, error) {
 	}
 
 	return info, nil
+}
+
+// Only for X11 display manager as of now
+// because I don't have wayland based machine
+func GetDisplayInfo() (string, error) {
+	cmd := exec.Command("xrandr", "--current")
+	data, err := cmd.Output()
+	if err != nil {
+		return "", errors.New("couldn't find any display info")
+	}
+
+	re := regexp.MustCompile(`(\d+)x(\d+)\s+([\d.]+)\*`)
+	matches := re.FindAllStringSubmatch(string(data), 1)
+
+	return fmt.Sprintf("%s x %s @ %sHz", matches[0][1], matches[0][2], matches[0][3]), nil
 }
