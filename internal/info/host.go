@@ -9,6 +9,20 @@ import (
 	"strings"
 )
 
+// User Info via whoami command
+func GetUserInfo() (string, error) {
+	cmd := exec.Command("whoami")
+	data, err := cmd.Output()
+
+	if err != nil {
+		return "", errors.New("couldn't find username via `whoami`")
+	}
+
+	username := strings.TrimSpace(string(data))
+
+	return username, nil
+}
+
 // OS Release Infomations
 // Which stored on the /etc/os-release file
 func GetOSRelease() (string, error) {
@@ -40,15 +54,16 @@ func GetOSRelease() (string, error) {
 
 // Kernal Version Info
 // Utilizing the uname command
-func GetKernalInfo() (string, error) {
+func GetKernelInfo() (string, error) {
 	cmd := exec.Command("uname", "-rs")
-	val, err := cmd.Output()
+	data, err := cmd.Output()
 
 	if err != nil {
-		return "", errors.New("coudn't find any kernal info")
+		return "", errors.New("coudn't find any kernel info")
 	}
 
-	return string(val), nil
+	kernel := strings.TrimSpace(string(data))
+	return kernel, nil
 }
 
 // Uptime Informations
