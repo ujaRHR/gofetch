@@ -1,10 +1,17 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"gofetch/internal/cmd"
 	"gofetch/internal/info"
 	"gofetch/internal/ui"
 	"strings"
+)
+
+var (
+	showHelp    = flag.Bool("help", false, "Show help")
+	showVersion = flag.Bool("version", false, "Show version")
 )
 
 const divider = "---------------------------------"
@@ -18,7 +25,17 @@ func label(s string) string {
 }
 
 func main() {
-	version := "GoFetch v1.0"
+	flag.Parse()
+
+	if *showHelp {
+		cmd.PrintHelp()
+		return
+	}
+
+	if *showVersion {
+		fmt.Println(cmd.Version)
+		return
+	}
 
 	username, _ := info.GetUserInfo()
 	os, _ := info.GetOSRelease()
@@ -36,7 +53,7 @@ func main() {
 	greeting := fmt.Sprintf(
 		"👋 Howdy, @%s! Welcome to %s",
 		ui.Bold+ui.Purple+username+ui.Reset,
-		ui.Bold+ui.Cyan+version+ui.Reset,
+		ui.Bold+ui.Cyan+cmd.Version+ui.Reset,
 	)
 
 	fmt.Println(divider)
