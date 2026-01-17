@@ -1,8 +1,8 @@
 # GoFetch v1.0
 
-GoFetch is a lightweight command-line tool written in Go for retrieving and displaying system information in a clean, human-friendly format.
+GoFetch is a lightweight command-line tool written in Go for retrieving and displaying system information in a clean, human-friendly format. It shows details like OS, kernel, uptime, shell, desktop environment, CPU/GPU, memory usage, local IP, and more...
 
-It shows details like OS, kernel, uptime, shell, desktop environment, CPU/GPU, memory usage, local IP, and more...
+![gofetch demo](./demo.png)
 
 ## Features
 
