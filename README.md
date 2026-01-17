@@ -29,7 +29,7 @@ Run:
 
 ### System-wide Installation (Linux)
 
-To use GoFetch from anywhere in your terminal, move it to a directory in your `PATH`, like `/usr/local/bin`:
+To use GoFetch from anywhere in your terminal, [download the gofetch file](https://github.com/ujaRHR/gofetch/releases/download/v1.0/gofetch)  (or your `gofetch` build file), and move it to a directory in your `PATH`, like `/usr/local/bin`:
 
 ```bash
 sudo mv gofetch /usr/local/bin/
