@@ -25,10 +25,7 @@ go.work
 go.work.sum
 
 # temp (custom)
-main.go
-test.go
-SAMPLE.md
-internal/
+gofetch
 
 # env file
 .env
